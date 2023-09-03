@@ -1,33 +1,25 @@
-import InputForm from './InputForm/InputForm';
-import ContactsList from './ContactsList/ContactsList';
-import Filter from './Filter/Filter';
-import Loader from './Loader/Loader';
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchContacts } from "../redux/operation";
-import { getError, getIsLoading } from "../redux/selectors";
+import { lazy } from "react";
+import { Route, Routes } from "react-router";
+import Layout from './Layout/Layout'
+
+const HomePage = lazy (() => import ('../pages/Home'));
+const RegisterPage = lazy (() => import ('../pages/Register'));
+const LoginPage = lazy (() => import ('../pages/Login'));
+const ContactsPage = lazy (() => import ('../pages/Contacts'));
+
 
 const App = () => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
-
-
+  
   return (
-    <>
-      <h1>Phonebook</h1>
-      <InputForm />
-      <h2>Contacts</h2>
-      <Filter />
-      {isLoading && !error && <Loader/>}
-      <ContactsList />
-    </>
-  );
+    <Routes>
+      <Route path="/" element={<Layout/>}>
+        <Route index element={<HomePage/>}/>
+        <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/login" element={<LoginPage/>}/>
+        <Route path='/contacts' element={<ContactsPage/>}/>
+      </Route>
+    </Routes>
+  )
 };
 
 export default App;
