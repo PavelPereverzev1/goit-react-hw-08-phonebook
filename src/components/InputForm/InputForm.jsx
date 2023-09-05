@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operation'
 import { getContacts } from 'redux/selectors';
 
-const InputForm = ({ createContact }) => {
+const InputForm = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
