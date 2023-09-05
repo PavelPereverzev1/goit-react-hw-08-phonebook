@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useAuth } from 'hooks/useAuth';
 import { refreshUser } from 'redux/auth/operations';
 import Loader from './Loader/Loader';
+import { fetchContacts } from 'redux/contacts/operation';
 
 const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
@@ -13,14 +14,15 @@ const ContactsPage = lazy(() => import('../pages/Contacts'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth;
+  const { isRefreshing, isLoggedIn } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch]);
+    isLoggedIn && dispatch(fetchContacts());
+  }, [dispatch, isLoggedIn]);
 
   return isRefreshing ? (
-    <Loader/>
+    <Loader />
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>

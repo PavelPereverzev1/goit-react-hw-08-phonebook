@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Container } from './Contact.styled';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operation';
+import { deleteContact } from 'redux/contacts/operation';
 
 const Contact = ({ id, name, phone }) => {
   const dispatch = useDispatch();
@@ -27,5 +27,5 @@ export default Contact;
 Contact.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phoneNumber: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
 };

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Form } from './InputForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operation'
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/contacts/operation';
+import { getContacts } from 'redux/contacts/selectors';
 
 const InputForm = () => {
   const [name, setName] = useState('');
@@ -38,7 +38,7 @@ const InputForm = () => {
     }
     const newContact = {
       name,
-      phone,
+      number: phone,
     };
     dispatch(addContact(newContact));
     setName('');
